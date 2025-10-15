@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Viewer - Document Library</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+<div class="container">
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-file-pdf"></i>
+                <span>PDF Viewer</span>
+            </div>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search documents..." class="search-input">
+                <button class="search-btn" onclick="searchDocuments()">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            <div class="header-buttons">
+                <button class="view-toggle-btn" id="bookmarksToggle" onclick="toggleBookmarksView()">
+                    <i class="fas fa-bookmark"></i>
+                    <span>My Bookmarks</span>
+                </button>
+                <button class="upload-btn" onclick="showUploadModal()">
+                    <i class="fas fa-upload"></i>
+                    Upload PDF
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="nav-tabs">
+        <button class="nav-tab active" id="documentsTab" onclick="showDocuments()">
+            <i class="fas fa-file-alt"></i>
+            All Documents
+        </button>
+        <button class="nav-tab" id="bookmarksTab" onclick="showBookmarks()">
+            <i class="fas fa-bookmark"></i>
+            Bookmarks (<span id="bookmarkCount">0</span>)
+        </button>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Documents Section -->
+        <div class="content-section active" id="documentsSection">
+            <div class="section-header">
+                <h2><i class="fas fa-file-alt"></i> All Documents</h2>
+            </div>
+            <div class="documents-grid" id="documentsGrid">
+                <!-- Documents will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Bookmarks Section -->
+        <div class="content-section" id="bookmarksSection">
+            <div class="section-header">
+                <h2><i class="fas fa-bookmark"></i> My Bookmarks</h2>
+                <p class="section-description">Quickly access your bookmarked documents and pages</p>
+            </div>
+            <div class="bookmarks-list" id="bookmarksList">
+                <!-- Bookmarks will be loaded here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Upload Modal -->
+    <div id="uploadModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Upload PDF Document</h2>
+                <span class="close" onclick="closeUploadModal()">&times;</span>
+            </div>
+            <form id="uploadForm" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="titleInput">Document Title (Optional):</label>
+                    <input type="text" id="titleInput" class="form-input" placeholder="Enter document title">
+                </div>
+                <div class="form-group">
+                    <label for="fileInput">Select PDF File:</label>
+                    <div class="file-input-container">
+                        <input type="file" id="fileInput" accept=".pdf" required class="file-input">
+                        <div class="file-input-display">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span id="fileInputText">Choose PDF file or drag and drop</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="closeUploadModal()">Cancel</button>
+                    <button type="submit" class="btn-primary">Upload</button>
+                </div>
+            </form>
+            <div id="uploadProgress" class="upload-progress" style="display: none;">
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <span class="progress-text">Uploading...</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="loading-spinner">
+        <div class="spinner"></div>
+    </div>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
